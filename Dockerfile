@@ -14,16 +14,15 @@ RUN apt-get update && apt-get install -y \
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar Gemfile primero para aprovechar cache de Docker
+# Copiar solo el Gemfile primero
 COPY Gemfile ./
-# Solo copiar Gemfile.lock si existe, pero no forzar su uso
-COPY Gemfile.loc* ./
 
-# Configurar bundle para regenerar el lockfile si es necesario
-RUN bundle config set --local deployment 'false' && \
-    bundle config set --local without 'development test' && \
-    bundle lock --add-platform x86_64-linux && \
+# Instalar dependencias sin usar el lockfile problemático
+RUN bundle config set --local without 'development test' && \
     bundle install
+
+# Copiar el resto de archivos después de instalar dependencias
+COPY . .
 
 # Copiar todo el código de la aplicación
 COPY . .
