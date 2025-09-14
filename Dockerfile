@@ -36,8 +36,8 @@ COPY . .
 RUN dos2unix ./init.sh && \
     chmod +x ./init.sh
 
-# Verificar que el archivo existe y es ejecutable
-RUN ls -la ./init.sh && file ./init.sh && file ./init.sh
+# Verificar que el archivo existe y es ejecutable (sin comando file)
+RUN ls -la ./init.sh
 
 # Exponer puerto
 EXPOSE 4567
