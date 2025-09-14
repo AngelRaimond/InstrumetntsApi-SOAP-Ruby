@@ -8,27 +8,29 @@ RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
     git \
     bash \
+    dos2unix \
     && rm -rf /var/lib/apt/lists/*
 
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar Gemfile y Gemfile.lock
-COPY Gemfile* ./
+# Copiar Gemfile primero para aprovechar cache de Docker
+COPY Gemfile ./
+# Solo copiar Gemfile.lock si existe, pero no forzar su uso
+COPY Gemfile.loc* ./
 
-# Instalar gemas
-RUN bundle config set --local deployment 'true' && \
+# Configurar bundle para regenerar el lockfile si es necesario
+RUN bundle config set --local deployment 'false' && \
     bundle config set --local without 'development test' && \
+    bundle lock --add-platform x86_64-linux && \
     bundle install
 
 # Copiar todo el código de la aplicación
 COPY . .
 
-# Asegurar que init.sh tenga permisos de ejecución
-RUN chmod +x ./init.sh
-
-# Asegurar que init.sh use terminaciones de línea Unix
-RUN sed -i 's/\r$//' ./init.sh
+# Convertir terminaciones de línea y dar permisos
+RUN dos2unix ./init.sh && \
+    chmod +x ./init.sh
 
 # Verificar que el archivo existe y es ejecutable
 RUN ls -la ./init.sh && file ./init.sh

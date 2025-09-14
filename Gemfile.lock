@@ -63,6 +63,8 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.6)
     nio4r (2.7.4)
+    nokogiri (1.18.9-x86_64-linux)
+      racc (~> 1.4)
     nokogiri (1.18.9-x86_64-linux-musl)
       racc (~> 1.4)
     nori (2.7.1)
@@ -127,22 +129,22 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     useragent (0.16.11)
-    wash_out (0.12.0)
-      nori (>= 2.0.0)
     webrick (1.9.1)
     zeitwerk (2.7.3)
 
 PLATFORMS
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
   activerecord (~> 7.0)
+  builder (~> 3.2)
   mysql2 (~> 0.5)
+  nokogiri (~> 1.15)
   puma (~> 6.0)
   rake
   sinatra (~> 3.0)
   standalone_migrations (~> 7.0)
-  wash_out (~> 0.12.0)
 
 BUNDLED WITH
    2.4.19
