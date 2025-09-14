@@ -172,7 +172,7 @@ Necesitas instalar los siguientes componentes según tu sistema operativo:
 
 Abre tu terminal/PowerShell ve al directorio donde quieras tener la aplicación con 
 ```bash
-cd tudirectoriodondequiereselproyecto
+cd Directorio de la carpeta donde quiieres el proyecto
 ```
 y ejecuta:
 
@@ -180,7 +180,7 @@ y ejecuta:
 git clone https://github.com/AngelRaimond/InstrumetntsApi-SOAP-Ruby.git
 ```
 ```bash
-cd TuRuta/instrumentos-api
+cd TuRuta/InstrumetntsApi-SOAP-Ruby
 ```
 
 ###  Ejecutar el Proyecto
@@ -189,7 +189,7 @@ En tu PowerShell o tu bash/shell preferido
 IMPORTANTE
 Asegurate de estar en el directorio del proyecto, si no, ve a el con el comando 
 ```bash
-cd TuRuta/instrumentos-api
+cd TuRuta/InstrumetntsApi-SOAP-Ruby
 ```
 si no no encontrará podman el Dockerfile
 
@@ -211,11 +211,7 @@ si no no encontrará podman el Dockerfile
 
 4. **Ejecutar la aplicación**:
    ```bash
-   podman run -d \
-     --name instrumentos-api \
-     --network instrumentos-network \
-     -p 4567:4567 \
-     instrumentos-api
+   podman run -d --name instrumentos-api  --network instrumentos-network -p 4567:4567 instrumentos-api
    ```
 
 ### ✅ Verificar que Todo Funciona
